@@ -1,10 +1,6 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import data.TestData;
-import io.qameta.allure.Step;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,71 +10,68 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import com.codeborne.selenide.WebDriverRunner;
+import pages.MainPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("smoke")
 public class MainPageTests extends TestBase{
 
-    TestData testData = new TestData();
+    MainPage page = new MainPage();
 
-    @BeforeEach
-    @Step("Открываем главную страницу")
-    public void openPage() {
-        open("https://bft.ru/");
-
+    @Test
+    void fillContactFormTest() {
+        page.openPage()
+                .openContactForm()
+                .setName()
+                .setEmail()
+                .setNumber()
+                .setAddress()
+                .setCompany()
+                .setComment();
+        //add Assert
     }
 
     @Test
-    public void fillFullFormTest() {
-        $(".header-panel__callback").click();
-        $("[name='name']").setValue(testData.fullName);
-        $$("[name='email']").get(1).setValue(testData.email);
-        $("[name='phone']").setValue(testData.number);
-        $("[name='region']").setValue(testData.address);
-        $("[name='organization']").setValue(testData.company);
-        $("[name='text']").setValue(testData.someText);
-    }
-
-    @Test
-    public void searchTest() {
-        $("button.header-panel__search.jsSearch").click();
-        $("[placeholder='Поиск по сайту']").setValue("Контакты службы техподдержки");
-        $(".search-wrap__submit").click();
-        $("#resheniya-result").shouldHave(text("Контакты службы техподдержки"));
+    void searchTest() {
+        page.openPage()
+                .openSearch()
+                .setSearchText()
+                .pressSearch()
+                .assertResult();
+        //add Assert
     }
 
     @CsvFileSource(resources = "/test_data/listOfHeaderMainPage.csv")
     @ParameterizedTest(name = "При выборе заголовка {0} под ним должен открываться выпадающий список, содержащий как минимум элемент {1}")
     void dropdownShouldOpenAndContainElement(String header, String elementOfDropdown) {
-        $(".header-bottom__menu.menu-desktop").$(byText(header)).hover();
-        $$("ul.linkedMenu-list").find(text(elementOfDropdown)).should(exist);
+        page.openPage()
+                .hoverHeader(header)
+                .checkOpenDropdown(elementOfDropdown);
     }
 
     @Test
     public void buttonCareerTakeToNextPage() {
         String urlCareer = "https://bft.ru/career/";
-        $(".btn.btn--red.btn--transparent.frontTeam__vacancy").shouldHave(text("Вакансии и карьера")).click();
-        String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
-        assertEquals(urlCareer, currentUrl);
+        page.openPage()
+                .buttonCareerTakeToNextPage();
+        assertEquals(urlCareer, page.getCurrentUrl());
     }
+
     @Test
     public void buttonInfoProjectTakeToNextPage() {
         String urlProjects = "https://bft.ru/projects/";
-        $(".btn.btn--white.frontPortfolio--link").shouldHave(text("Узнать информацию о проектах")).click();
-        String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
-        assertEquals(urlProjects, currentUrl);
+        page.openPage()
+                .buttonProjectInfoTakeToNextPage();
+        assertEquals(urlProjects, page.getCurrentUrl());
     }
+
     @Test
     public void buttonVK() {
         String urlVK = "https://vk.com/bftcom";
-        $("#bx_3099439860_39181").click();
-        Selenide.switchTo().window(1);
-        String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
-        assertEquals(urlVK, currentUrl);
-    }
-    @Test
-    void encodingTest() {
-        System.out.println("Вакансии и карьера");
+        page.openPage()
+                .pressVkButton();
+
+        assertEquals(urlVK, page.getCurrentUrl());
     }
 }

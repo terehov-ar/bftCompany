@@ -18,7 +18,6 @@ public class TestBase {
     static void setupEnvironment() {
         String remoteAddress = System.getProperty("remoteAddress");
 
-        Configuration.baseUrl = "https://bft.ru/";
         Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 10000;
 //        Configuration.remote = remoteAddress;
