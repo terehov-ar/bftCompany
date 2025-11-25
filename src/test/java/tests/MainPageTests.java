@@ -17,6 +17,7 @@ import com.codeborne.selenide.WebDriverRunner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Tag("smoke")
 public class MainPageTests extends TestBase{
 
     TestData testData = new TestData();
@@ -49,7 +50,6 @@ public class MainPageTests extends TestBase{
 
     @CsvFileSource(resources = "/test_data/listOfHeaderMainPage.csv")
     @ParameterizedTest(name = "При выборе заголовка {0} под ним должен открываться выпадающий список, содержащий как минимум элемент {1}")
-    @Tag("Smoke")
     void dropdownShouldOpenAndContainElement(String header, String elementOfDropdown) {
         $(".header-bottom__menu.menu-desktop").$(byText(header)).hover();
         $$("ul.linkedMenu-list").find(text(elementOfDropdown)).should(exist);
@@ -76,5 +76,9 @@ public class MainPageTests extends TestBase{
         Selenide.switchTo().window(1);
         String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
         assertEquals(urlVK, currentUrl);
+    }
+    @Test
+    void encodingTest() {
+        System.out.println("Вакансии и карьера");
     }
 }
