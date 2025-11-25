@@ -1,5 +1,7 @@
 package tests;
 
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import data.TestData;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,10 +22,21 @@ public class MainPageTests extends TestBase{
     TestData testData = new TestData();
 
     @BeforeEach
-    @Step("Открываем страницу с формой регистрации")
+    @Step("Открываем главную страницу")
     public void openPage() {
         open("https://bft.ru/");
 
+    }
+
+    @Test
+    public void fillFullFormTest() {
+        $(".header-panel__callback").click();
+        $("[name='name']").setValue(testData.fullName);
+        $$("[name='email']").get(1).setValue(testData.email);
+        $("[name='phone']").setValue(testData.number);
+        $("[name='region']").setValue(testData.address);
+        $("[name='organization']").setValue(testData.company);
+        $("[name='text']").setValue(testData.someText);
     }
 
     @Test
@@ -44,27 +57,24 @@ public class MainPageTests extends TestBase{
 
     @Test
     public void buttonCareerTakeToNextPage() {
-        String url = "https://bft.ru/career/";
+        String urlCareer = "https://bft.ru/career/";
         $(".btn.btn--red.btn--transparent.frontTeam__vacancy").shouldHave(text("Вакансии и карьера")).click();
         String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
-        assertEquals(url, currentUrl);
+        assertEquals(urlCareer, currentUrl);
     }
     @Test
     public void buttonInfoProjectTakeToNextPage() {
-        String url = "https://bft.ru/projects/";
+        String urlProjects = "https://bft.ru/projects/";
         $(".btn.btn--white.frontPortfolio--link").shouldHave(text("Узнать информацию о проектах")).click();
         String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
-        assertEquals(url, currentUrl);
+        assertEquals(urlProjects, currentUrl);
     }
-
     @Test
-    public void fillFullFormTest() {
-        $(".header-panel__callback").click();
-        $("[name='name']").setValue(testData.fullName);
-        $$("[name='email']").get(1).setValue(testData.email);
-        $("[name='phone']").setValue(testData.number);
-        $("[name='region']").setValue(testData.address);
-        $("[name='organization']").setValue(testData.company);
-        $("[name='text']").setValue(testData.someText);
+    public void buttonVK() {
+        String urlVK = "https://vk.com/bftcom";
+        $("#bx_3099439860_39181").click();
+        Selenide.switchTo().window(1);
+        String currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
+        assertEquals(urlVK, currentUrl);
     }
 }
