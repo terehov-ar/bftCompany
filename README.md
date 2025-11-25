@@ -14,6 +14,8 @@ ____
 * <a href="#allure">Allure report</a>
 
 * <a href="#allure-testops">Интеграция с Allure TestOps</a>
+* 
+* <a href="#jira">Интеграция с Jira</a>
 
 * <a href="#telegram">Уведомления в Telegram</a>
 
@@ -42,7 +44,7 @@ ____
 ## <img alt="Jenkins" height="25" src="images/logo/Jenkins.svg" width="25"/></a><a name="Build"></a>Сборка в [Jenkins](https://jenkins.autotests.cloud/job/C38-ar_terekhov-bft_company/)</a>
 ____
 <p align="center">  
-<a href="https://jenkins.autotests.cloud/job/sushi_site/"><img src="images/screen/jenkinsProject.png" alt="Jenkins" width="950"/></a>  
+<a href="https://jenkins.autotests.cloud/job/C38-ar_terekhov-bft_company/"><img src="images/screen/jenkinsProject.png" alt="Jenkins" width="950"/></a>  
 </p>
 
 
@@ -68,7 +70,7 @@ clean smoke_test
 ```
 ___
 <a id="allure"></a>
-## <img alt="Allure" height="25" src="images/logo/Allure.svg" width="25"/></a> <a name="Allure"></a>Allure [report](https://jenkins.autotests.cloud/job/sushi_site/16/allure/)</a>
+## <img alt="Allure" height="25" src="images/logo/Allure.svg" width="25"/></a> <a name="Allure"></a>Allure [report](https://jenkins.autotests.cloud/job/C38-ar_terekhov-bft_company/6/allure/)</a>
 ___
 
 ### *Main report page*
