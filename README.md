@@ -14,7 +14,7 @@ ____
 * <a href="#allure">Allure report</a>
 
 * <a href="#allure-testops">Интеграция с Allure TestOps</a>
-* 
+
 * <a href="#jira">Интеграция с Jira</a>
 
 * <a href="#telegram">Уведомления в Telegram</a>
