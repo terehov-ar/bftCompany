@@ -44,33 +44,29 @@ ____
 </p>
 
 
-### **Build parameters in Jenkins:**
+### **Параметры сборки в Jenkins:**
 
 - *browser (browser, default chrome)*
 - *browserVersion (browser version, default 208.0)*
 - *browserSize (browser window size, default 1920x1080)*
-- *remoteUrl (login, password and address of the remote Selenoid server)*
-
-<a id="console"></a>
-## Commands for running from terminal
 ___
-***Local run:***
+<a id="console"></a>
+## Команды для запуска через терминал  
+***Локальный запуск:***
 ```bash  
 gradle clean smoke_test  
 ```
 
-***Remote run via Jenkins:***
+***Удаленный запуск через Jenkins:***
 ```bash  
-clean test
+clean smoke_test
 "-Dbrowser=${browser}"
 "-DbrowserVersion=${browserVersion}"
 "-DbrowserSize=${browserSize}"
-"-DremoteUrl=${remoteUrl}"
 ```
 ___
 <a id="allure"></a>
 ## <img alt="Allure" height="25" src="images/logo/Allure.svg" width="25"/></a> <a name="Allure"></a>Allure [report](https://jenkins.autotests.cloud/job/sushi_site/16/allure/)</a>
-___
 
 ### *Main report page*
 
@@ -93,18 +89,6 @@ ____
 <p align="center">  
 <img title="Allure TestOps Dashboard" src="images/screen/testOpsDashboard.jpeg" width="850">  
 </p>  
-
-### *Manual test cases*
-
-<p align="center">  
-<img title="Allure Tests" src="images/screen/testOpsManual.jpeg" width="850">  
-</p>
-
-### *Automated test cases*
-
-<p align="center">  
-<img title="Allure TestOps Tests" src="images/screen/testOpsAuto.jpeg" width="850">  
-</p>
 
 ___
 <a id="jira"></a>
