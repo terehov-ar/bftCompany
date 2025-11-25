@@ -11,11 +11,9 @@ import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainPage {
 
-    TestData testData = new TestData();
 
     private final SelenideElement buttonContact = $(".header-panel__callback"),
             inputName = $("[name='name']"),
@@ -30,21 +28,7 @@ public class MainPage {
             headerPage = $(".header-bottom__menu.menu-desktop"),
             buttonCareer = $(".btn.btn--red.btn--transparent.frontTeam__vacancy"),
             buttonPortfolio =  $(".btn.btn--white.frontPortfolio--link"),
-            buttonVK =  $("#bx_3099439860_39181"),
-
-
-            userEmailInput = $("#userEmail"),
-            genderWrapper = $("#genterWrapper"),
-            userNumberInput = $("#userNumber"),
-            calendarInput = $("#dateOfBirthInput"),
-            subjectsInput = $("#subjectsInput"),
-            hobbiesInput = $("#hobbiesWrapper"),
-            currentAddressInput = $("#currentAddress"),
-            stateInput = $("#state"),
-            cityInput = $("#city"),
-            submitButton = $("#submit"),
-            uploadAttach = $("#uploadPicture"),
-            finishModal = $("#example-modal-sizes-title-lg");
+            buttonVK =  $("#bx_3099439860_39181");
 
     private final ElementsCollection inputsEmail = $$("[name='email']");
     private final ElementsCollection dropdownElements = $$("ul.linkedMenu-list");
@@ -64,43 +48,43 @@ public class MainPage {
     }
 
     @Step("Заполняем поле 'Полное ФИО'")
-    public MainPage setName() {
-        inputName.setValue(testData.fullName);
+    public MainPage setName(String value) {
+        inputName.setValue(value);
 
         return this;
     }
 
     @Step("Заполняем поле 'E-mail'")
-    public MainPage setEmail() {
-        inputsEmail.get(1).setValue(testData.email);
+    public MainPage setEmail(String value) {
+        inputsEmail.get(1).setValue(value);
 
         return this;
     }
 
     @Step("Заполняем поле 'Номер телефона'")
-    public MainPage setNumber() {
-        inputPhone.setValue(testData.number);
+    public MainPage setNumber(String value) {
+        inputPhone.setValue(value);
 
         return this;
     }
 
     @Step("Заполняем поле 'Регион'")
-    public MainPage setAddress() {
-        inputRegion.setValue(testData.address);
+    public MainPage setAddress(String value) {
+        inputRegion.setValue(value);
 
         return this;
     }
 
     @Step("Заполняем поле 'Наименование организации'")
-    public MainPage setCompany() {
-        inputOrganization.setValue(testData.company);
+    public MainPage setCompany(String value) {
+        inputOrganization.setValue(value);
 
         return this;
     }
 
     @Step("Заполняем поле 'Введите текст'")
-    public MainPage setComment() {
-        inputComment.setValue(testData.someText);
+    public MainPage setComment(String value) {
+        inputComment.setValue(value);
 
         return this;
     }
@@ -113,8 +97,8 @@ public class MainPage {
     }
 
     @Step("Заполняем поле поиска")
-    public MainPage setSearchText() {
-        placeholderSearch.setValue("Контакты службы техподдержки");
+    public MainPage setSearchText(String value) {
+        placeholderSearch.setValue(value);
 
         return this;
     }
@@ -127,8 +111,8 @@ public class MainPage {
     }
 
     @Step("Проверяем наличие записи в результатах поиска 'Контакты службы техподдержки'")
-    public MainPage assertResult() {
-        resultList.shouldHave(text("Контакты службы техподдержки"));
+    public MainPage assertResult(String value) {
+        resultList.shouldHave(text(value));
 
         return this;
     }

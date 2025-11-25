@@ -1,6 +1,7 @@
 package tests;
 
 import com.codeborne.selenide.Selenide;
+import data.TestData;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,27 +19,30 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MainPageTests extends TestBase{
 
     MainPage page = new MainPage();
+    TestData testData = new TestData();
 
     @Test
     void fillContactFormTest() {
         page.openPage()
                 .openContactForm()
-                .setName()
-                .setEmail()
-                .setNumber()
-                .setAddress()
-                .setCompany()
-                .setComment();
+                .setName(testData.fullName)
+                .setEmail(testData.email)
+                .setNumber(testData.number)
+                .setAddress(testData.address)
+                .setCompany(testData.company)
+                .setComment(testData.someText);
+
         //add Assert
     }
 
     @Test
     void searchTest() {
+        String searchText = "Контакты службы техподдержки";
         page.openPage()
                 .openSearch()
-                .setSearchText()
+                .setSearchText(searchText)
                 .pressSearch()
-                .assertResult();
+                .assertResult(searchText);
         //add Assert
     }
 
