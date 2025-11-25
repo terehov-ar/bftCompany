@@ -16,7 +16,6 @@ public class MainPage {
             inputName = $("[name='name']"),
             inputPhone = $("[name='phone']"),
             inputRegion = $("[name='region']"),
-            inputOrganization = $("[name='organization']"),
             inputComment = $("[name='text']"),
             buttonSearch = $("button.header-panel__search.jsSearch"),
             placeholderSearch = $("[placeholder='Поиск по сайту']"),
@@ -34,7 +33,7 @@ public class MainPage {
 
     @Step("Открываем главную страницу")
     public MainPage openPage() {
-        open("https://bft.ru/");
+        open("/");
 
         return this;
     }
