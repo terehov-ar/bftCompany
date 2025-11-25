@@ -16,11 +16,10 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 public class TestBase {
     @BeforeAll
     static void setupEnvironment() {
-        String remoteAddress = System.getProperty("remoteAddress");
 
         Configuration.pageLoadStrategy = "eager";
         Configuration.timeout = 10000;
-//        Configuration.remote = remoteAddress;
+        Configuration.remote = System.getProperty("remote", "https://user1:1234@selenoid.autotests.cloud/wd/hub");
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("browserVersion");
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
