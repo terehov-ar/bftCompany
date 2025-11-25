@@ -4,16 +4,13 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
-import data.TestData;
 import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class MainPage {
-
 
     private final SelenideElement buttonContact = $(".header-panel__callback"),
             inputName = $("[name='name']"),
@@ -28,7 +25,9 @@ public class MainPage {
             headerPage = $(".header-bottom__menu.menu-desktop"),
             buttonCareer = $(".btn.btn--red.btn--transparent.frontTeam__vacancy"),
             buttonPortfolio =  $(".btn.btn--white.frontPortfolio--link"),
-            buttonVK =  $("#bx_3099439860_39181");
+            buttonVK =  $("#bx_3099439860_39181"),
+            buttonSubmitContact =  $(".btn.btn--red.btn--transparent.modalContent-btn").$(byText("Отправить")),
+            organizationValidationInput =  $("#organization-error");
 
     private final ElementsCollection inputsEmail = $$("[name='email']");
     private final ElementsCollection dropdownElements = $$("ul.linkedMenu-list");
@@ -75,9 +74,16 @@ public class MainPage {
         return this;
     }
 
-    @Step("Заполняем поле 'Наименование организации'")
-    public MainPage setCompany(String value) {
-        inputOrganization.setValue(value);
+    @Step("Нажимаем на кнопку 'Отправить' на форме обратной связи")
+    public MainPage pressButtonSubmitContact() {
+        buttonSubmitContact.click();
+
+        return this;
+    }
+
+    @Step("Проверяем отображение валидации поля 'Наименование организации'")
+    public MainPage checkValidationInputCompany() {
+        organizationValidationInput.shouldHave(attribute("class", "error"));
 
         return this;
     }
@@ -150,6 +156,7 @@ public class MainPage {
 
         return this;
     }
+
     @Step("Нажимаем на логотип 'ВК'")
     public MainPage pressVkButton() {
         buttonVK.click();

@@ -1,53 +1,45 @@
 package tests;
 
-import com.codeborne.selenide.Selenide;
 import data.TestData;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
-import com.codeborne.selenide.WebDriverRunner;
 import pages.MainPage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("smoke")
-public class MainPageTests extends TestBase{
+public class MainPageTests extends TestBase {
 
     MainPage page = new MainPage();
     TestData testData = new TestData();
 
     @Test
-    void fillContactFormTest() {
+    void notFullFillContactFormTest() {
         page.openPage()
                 .openContactForm()
                 .setName(testData.fullName)
                 .setEmail(testData.email)
                 .setNumber(testData.number)
                 .setAddress(testData.address)
-                .setCompany(testData.company)
-                .setComment(testData.someText);
-
-        //add Assert
+                .setComment(testData.someText)
+                .pressButtonSubmitContact()
+                .checkValidationInputCompany();
     }
 
     @Test
-    void searchTest() {
+    void searchTestShouldContainResult() {
         String searchText = "Контакты службы техподдержки";
         page.openPage()
                 .openSearch()
                 .setSearchText(searchText)
                 .pressSearch()
                 .assertResult(searchText);
-        //add Assert
     }
 
     @CsvFileSource(resources = "/test_data/listOfHeaderMainPage.csv")
-    @ParameterizedTest(name = "При выборе заголовка {0} под ним должен открываться выпадающий список, содержащий как минимум элемент {1}")
+    @ParameterizedTest(name = "При выборе заголовка {0} под ним должен открываться выпадающий список, содержащий элемент {1}")
     void dropdownShouldOpenAndContainElement(String header, String elementOfDropdown) {
         page.openPage()
                 .hoverHeader(header)
@@ -71,7 +63,7 @@ public class MainPageTests extends TestBase{
     }
 
     @Test
-    public void buttonVK() {
+    public void buttonVKTakeToVK() {
         String urlVK = "https://vk.com/bftcom";
         page.openPage()
                 .pressVkButton();
