@@ -33,7 +33,7 @@ public class MainPage {
 
     @Step("Открываем главную страницу")
     public MainPage openPage() {
-        open("/");
+        open("");
 
         return this;
     }
