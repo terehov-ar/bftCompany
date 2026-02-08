@@ -10,6 +10,5 @@ public class TestData {
             email = faker.internet().emailAddress(),
             number = faker.phoneNumber().subscriberNumber(10),
             address = faker.address().fullAddress(),
-            company = faker.company().name(),
             someText = faker.harryPotter().character();
 }

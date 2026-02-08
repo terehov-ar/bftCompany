@@ -1,23 +1,31 @@
 package tests;
 
 import data.TestData;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import pages.MainPage;
+import pages.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("smoke")
+@Story("1829-UI")
 public class MainPageTests extends TestBase {
 
-    MainPage page = new MainPage();
+    MainPage mainPage = new MainPage();
     TestData testData = new TestData();
+    CarrerPage carrerPage = new CarrerPage();
+    ProjectsPage projectsPage = new ProjectsPage();
+    SocialPage socialPage = new SocialPage();
 
     @Test
+    @Severity(SeverityLevel.MINOR)
     void notFullFillContactFormTest() {
-        page.openPage()
+        mainPage.openPage()
                 .openContactForm()
                 .setName(testData.fullName)
                 .setEmail(testData.email)
@@ -29,9 +37,10 @@ public class MainPageTests extends TestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.NORMAL)
     void searchTestShouldContainResult() {
         String searchText = "Контакты службы техподдержки";
-        page.openPage()
+        mainPage.openPage()
                 .openSearch()
                 .setSearchText(searchText)
                 .pressSearch()
@@ -40,34 +49,38 @@ public class MainPageTests extends TestBase {
 
     @CsvFileSource(resources = "/test_data/listOfHeaderMainPage.csv")
     @ParameterizedTest(name = "При выборе заголовка {0} под ним должен открываться выпадающий список, содержащий элемент {1}")
+    @Severity(SeverityLevel.CRITICAL)
     void dropdownShouldOpenAndContainElement(String header, String elementOfDropdown) {
-        page.openPage()
+        mainPage.openPage()
                 .hoverHeader(header)
                 .checkOpenDropdown(elementOfDropdown);
     }
 
     @Test
+    @Severity(SeverityLevel.NORMAL)
     public void buttonCareerTakeToNextPage() {
         String urlCareer = "https://bft.ru/career/";
-        page.openPage()
-                .buttonCareerTakeToNextPage();
-        assertEquals(urlCareer, page.getCurrentUrl());
+        mainPage.openPage()
+                .buttonCareerTakeToNextPage("Вакансии и карьера");
+        assertEquals(urlCareer, carrerPage.getCurrentUrl());
     }
 
     @Test
+    @Severity(SeverityLevel.NORMAL)
     public void buttonInfoProjectTakeToNextPage() {
         String urlProjects = "https://bft.ru/projects/";
-        page.openPage()
-                .buttonProjectInfoTakeToNextPage();
-        assertEquals(urlProjects, page.getCurrentUrl());
+        mainPage.openPage()
+                .buttonProjectInfoTakeToNextPage("Узнать информацию о проектах");
+        assertEquals(urlProjects, projectsPage.getCurrentUrl());
     }
 
     @Test
+    @Severity(SeverityLevel.NORMAL)
     public void buttonVKTakeToVK() {
         String urlVK = "https://vk.com/bftcom";
-        page.openPage()
+        mainPage.openPage()
                 .pressVkButton();
 
-        assertEquals(urlVK, page.getCurrentUrl());
+        assertEquals(urlVK, socialPage.getCurrentUrl());
     }
 }

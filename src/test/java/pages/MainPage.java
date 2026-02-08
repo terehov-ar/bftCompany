@@ -137,8 +137,8 @@ public class MainPage {
     }
 
     @Step("Нажимаем на кнопку 'Вакансии и карьера'")
-    public MainPage buttonCareerTakeToNextPage() {
-        buttonCareer.shouldHave(text("Вакансии и карьера")).click();
+    public MainPage buttonCareerTakeToNextPage(String jobInfo) {
+        buttonCareer.shouldHave(text(jobInfo)).click();
 
         return this;
     }
@@ -150,8 +150,8 @@ public class MainPage {
     }
 
     @Step("Нажимаем на кнопку 'Вакансии и карьера'")
-    public MainPage buttonProjectInfoTakeToNextPage() {
-        buttonPortfolio.shouldHave(text("Узнать информацию о проектах")).click();
+    public MainPage buttonProjectInfoTakeToNextPage(String projectInfo) {
+        buttonPortfolio.shouldHave(text(projectInfo)).click();
 
         return this;
     }
