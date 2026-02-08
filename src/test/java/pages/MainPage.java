@@ -3,7 +3,6 @@ package pages;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.*;
@@ -141,12 +140,6 @@ public class MainPage {
         buttonCareer.shouldHave(text(jobInfo)).click();
 
         return this;
-    }
-
-    @Step("Получить текущий url")
-    public String getCurrentUrl() {
-
-        return WebDriverRunner.getWebDriver().getCurrentUrl();
     }
 
     @Step("Нажимаем на кнопку 'Вакансии и карьера'")

@@ -18,7 +18,7 @@ public class MainPageTests extends TestBase {
 
     MainPage mainPage = new MainPage();
     TestData testData = new TestData();
-    CarrerPage carrerPage = new CarrerPage();
+    CareerPage careerPage = new CareerPage();
     ProjectsPage projectsPage = new ProjectsPage();
     SocialPage socialPage = new SocialPage();
 
@@ -62,7 +62,7 @@ public class MainPageTests extends TestBase {
         String urlCareer = "https://bft.ru/career/";
         mainPage.openPage()
                 .buttonCareerTakeToNextPage("Вакансии и карьера");
-        assertEquals(urlCareer, carrerPage.getCurrentUrl());
+        assertEquals(urlCareer, careerPage.getCurrentUrl());
     }
 
     @Test
@@ -82,5 +82,13 @@ public class MainPageTests extends TestBase {
                 .pressVkButton();
 
         assertEquals(urlVK, socialPage.getCurrentUrl());
+    }
+
+    @Test
+    @Severity(SeverityLevel.NORMAL)
+    public void checkProjectPageHeader() {
+        projectsPage.openPage()
+                .checkHeaderName("Проекты БФТ");
+
     }
 }
